@@ -1,0 +1,8 @@
+:! "Welcome to VidTrx!";
+:! "What's your name?";
+
+String name;
+
+:? name;
+
+:! "Hello, " + name;

@@ -1,0 +1,38 @@
+
+:! "Which video do you want to transcode?";
+
+String filename;
+:? filename;
+
+:! "Where do you want to save the new video?";
+String newfile;
+:? newfile;
+
+:! "At what speed do you want it?";
+
+String speedTxt;
+:? speedTxt;
+
+Float video_speed = Float[speedTxt]; 
+
+Video video { filename;
+
+^^
+
+Console.WriteLine("HOLA");
+
+^^
+
+
+Int hola;
+
+while (condicion) do
+
+end
+
+|newfile| 
+<< 
+    <- speed: video_speed 
+    <- video 
+<< 
+    <~ video; 

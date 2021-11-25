@@ -1,0 +1,23 @@
+
+:! "Which video do you want to transcode?";
+
+String filename;
+:? filename;
+
+
+:! "Where do you want to save the new video?";
+String newfile;
+:? newfile;
+
+String heigth;
+String width;
+
+:! "Which heigth?";
+:? heigth;
+
+:! "Which Width?";
+:? width;
+
+Video video { filename;
+
+!| newfile | << <- size: heigth + "x" + width <- video << <~ video;
