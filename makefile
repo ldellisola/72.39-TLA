@@ -24,11 +24,11 @@ $(OUT): $(DEPS)
 	@mkdir -p $(TGT_CONTEXT)/dotnet/
 	lex -o $(TGT_CONTEXT)/lex.yy.c $(SRC_CONTEXT)/lex.l
 	bison -b $(TGT_CONTEXT)/y -v -d $(SRC_CONTEXT)/grammar.y
-	gcc-11 -o $(OUT) $(TGT_CONTEXT)/lex.yy.c  -I $(INCLUDE) $(SRC_CONTEXT)/types.c $(SRC_CONTEXT)/node.c $(SRC_CONTEXT)/print.c $(SRC_CONTEXT)/variables.c $(SRC_CONTEXT)/translator.c  $(SRC_CONTEXT)/errors.c $(TGT_CONTEXT)/y.tab.c   $(GCC_FLAGS)
+	gcc -o $(OUT) $(TGT_CONTEXT)/lex.yy.c  -I $(INCLUDE) $(SRC_CONTEXT)/types.c $(SRC_CONTEXT)/node.c $(SRC_CONTEXT)/print.c $(SRC_CONTEXT)/variables.c $(SRC_CONTEXT)/translator.c  $(SRC_CONTEXT)/errors.c $(TGT_CONTEXT)/y.tab.c   $(GCC_FLAGS)
 
 
 compile: $(OUT)
-	cp -R $(DOTNET_PROJ)/ $(TGT_CONTEXT)/dotnet/
+	cp -R $(DOTNET_PROJ)/* $(TGT_CONTEXT)/dotnet/
 	./$(OUT) $(CS_FILE) < $(INPUT)
 	dotnet publish $(TGT_CONTEXT)/dotnet/ -a x64 -c release -v q -nologo -o $(TGT_CONTEXT)/bin
 	cp $(TGT_CONTEXT)/bin/dotnet $(OUTPUT)
@@ -39,9 +39,9 @@ translate: $(OUT)
 debug: $(DEPS)
 	@mkdir -p $(TGT_CONTEXT)
 	lex -o $(TGT_CONTEXT)/lex.yy.c $(SRC_CONTEXT)/lex.l
-	bison -b $(TGT_CONTEXT)/y -Wcounterexamples -v -d $(SRC_CONTEXT)/grammar.y 
+	bison -b $(TGT_CONTEXT)/y -Wcounterexamples -v -d $(SRC_CONTEXT)/grammar.y
 
-	
+
 
 all: $(OUT)
 
