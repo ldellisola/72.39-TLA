@@ -35,6 +35,7 @@ void translate_to_file(Node * root, const char * filePath){
 *******************************************************************/
 
 void translate_value(Node * node);
+void translate_variable_name(Node * node);
 void translate_value_float(Node * node);
 void translate_if(Node * node);
 void translate_while(Node * node);
@@ -71,7 +72,7 @@ void (* translations[])(Node *) = {
   translate_if,                           // NODE_STATEMENT_IF
   translate_while,                         // NODE_STATEMENT_WHILE
   translate_else,                         // NODE_STATEMENT_ELSE,
-  translate_value,                        // NODE_VARIABLE_NAME
+  translate_variable_name,                        // NODE_VARIABLE_NAME
   translate_binary_operator,              // NODE_OPERATOR_EQUALS
   translate_binary_operator,              // NODE_OPERATOR_NOT_EQUALS
   translate_binary_operator,              // NODE_OPERATOR_ADDITION
@@ -84,14 +85,14 @@ void (* translations[])(Node *) = {
   translate_binary_operator,              // NODE_OPERATOR_LOGIC_AND
   translate_unary_operator,               // NODE_OPERATOR_NOT
   translate_function_print,               // NODE_FUNCTION_PRINT
-  translate_function_read,                // NODE_FUNCTION_REAd
+  translate_function_read,                // NODE_FUNCTION_READ
   translate_function_transcode_video,     // NODE_FUNCTION_TRANSCODE_VIDEO
   translate_function_transcode_audio,     // NODE_FUNCTION_TRANSCODE_AUDIO
   translate_function_append_stream,       // NODE_FUNCTION_APPEND_STREAM
   translate_function_save_video,          // NODE_FUNCTION_SAVE_VIDEO
   translate_function_open_video,          // NODE_FUNCTION_OPEN_VIDEO
   translate_function_save_overwrite_video,// NODE_FUNCTION_SAVE_OVERWRITE_VIDEO
-  translate_function_parse_string,// NODE_FUNCTION_PARSE_STRING
+  translate_function_parse_string,        // NODE_FUNCTION_PARSE_STRING
   translate_assignment,                   // NODE_ASSIGNMENT
   translate_declaration,                  // NODE_DECLARATION
   translate_declaration_assignment,       // NODE_DECLARATION_ASSIGNMENT
@@ -138,6 +139,11 @@ const char * get_parameter(Node * node);
 
 void translate_value(Node * node){
   fprintf(output," %s ",node->value);
+}
+
+
+void translate_variable_name(Node * node){
+  fprintf(output," _%s ",node->value);
 }
 
 void translate_value_float(Node * node){
@@ -241,9 +247,9 @@ void translate_function_parse_string(Node * node){
 }
 
 void translate_function_open_video(Node * node){
-  fprintf(output,"Helpers.OpenVideo( ");
+  fprintf(output,"Helpers.OpenVideo(");
   translate(node->left);
-  fprintf(output," )");
+  fprintf(output,")");
 }
 
 
@@ -251,14 +257,12 @@ void translate_assignment(Node * node){
   translate(node->left);
   fprintf(output," = ");
   translate(node->right);
-  fprintf(output,"\n");
 }
 
 void translate_declaration(Node * node){
   translate(node->left);
   fprintf(output, " ");
   translate(node->right);
-  fprintf(output,"\n");
 }
 
 void translate_declaration_assignment(Node * node){
@@ -275,7 +279,7 @@ void translate_assignment_open_video(Node * node){
 }
 
 void translate_type(Node * node){
-  fprintf(output, " %s ", get_type_definition(node));
+  fprintf(output, "%s", get_type_definition(node));
 }
 
 void translate_parameters_list(Node * node){

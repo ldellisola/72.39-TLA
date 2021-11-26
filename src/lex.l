@@ -70,7 +70,7 @@
 "true"|"false"                  {copy_text(yylval.text,yytext); return VALUE_BOOL;}
 [0-9]+\.[0-9]+                  {copy_text(yylval.text,yytext); return VALUE_FLOAT;}
 \".*\"                          {copy_text(yylval.text,yytext); return VALUE_STRING;}
-[A-Za-z_\-][A-Za-z0-9_\-]+      {copy_text(yylval.text,yytext); return VARIABLE_NAME;}
+[A-Za-z_\-][A-Za-z0-9_\-]*      {copy_text(yylval.text,yytext); return VARIABLE_NAME;}
 ^^(.|\n)*^^                     {
                                     int length = strlen(yytext)-2;
                                     yylval.unrestricted_text = calloc(length,sizeof(char));
