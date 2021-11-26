@@ -9,7 +9,7 @@ DEPS= $(DOTNET_PROJ)/lib.cs $(SRC_CONTEXT)/grammar.y $(SRC_CONTEXT)/lex.l $(SRC_
 OUT=$(TGT_CONTEXT)/compiler
 
 INPUT=test.vi
-OUTPUT=a.out
+OUTPUT=run
 
 CS_FILE=$(TGT_CONTEXT)/dotnet/Program.cs
 
