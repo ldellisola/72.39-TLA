@@ -31,6 +31,12 @@ NodeType get_node_type(Node * node);
 // It assigns the data type to a variable stored in variables.c
 void node_assignment(Node * node, NodeType type);
 
+// It returns true if the type is Int or Float
+bool is_type_numeric(NodeType type);
+
+// It returns true if the type can be converted to string, like bool or Int
+bool can_type_be_stringified(NodeType type);
+
 
 /*******************************************************************
 *                       LOOKUP TABLES                              * 
@@ -165,6 +171,7 @@ NodeType inspect_aritmetic_operator_type(Node * node);
 NodeType inspect_comparable_operator_type(Node * node);
 NodeType inspect_logical_operator_type(Node * node);
 NodeType inspect_unary_operator_type(Node * node);
+NodeType inspect_print_function_type(Node* node);
 NodeType inspect_read_function_type(Node* node);
 NodeType inspect_transcode_function_type(Node* node);
 NodeType inspect_append_stream_function_type(Node *node);
@@ -200,7 +207,7 @@ NodeType (* inspect_type[])(Node *) = {
   inspect_logical_operator_type,                  // NODE_OPERATOR_LOGIC_OR
   inspect_logical_operator_type,                  // NODE_OPERATOR_LOGIC_AND
   inspect_unary_operator_type,                    // NODE_OPERATOR_NOT
-  inspect_read_function_type,                     // NODE_FUNCTION_PRINT
+  inspect_print_function_type,                     // NODE_FUNCTION_PRINT
   inspect_read_function_type,                     // NODE_FUNCTION_READ
   inspect_transcode_function_type,                // NODE_FUNCTION_TRANSCODE_VIDEO
   inspect_transcode_function_type,                // NODE_FUNCTION_TRANSCODE_AUDIO
@@ -315,7 +322,7 @@ NodeType inspect_comparable_operator_type(Node * node){
         // check that both sides are numbers
   NodeType left_type = get_node_type(node->left);
   NodeType right_type = get_node_type(node->right);
-  if ((left_type != TYPE_FLOAT && left_type != TYPE_INT) || (right_type != TYPE_FLOAT && right_type != TYPE_INT))
+  if (!is_type_numeric(left_type)|| !is_type_numeric(right_type ))
     {
       type_error(node,"The values of type '%s' and '%s' are not comparable",
         get_type_name(left_type),
@@ -352,9 +359,19 @@ NodeType inspect_unary_operator_type(Node * node){
   return node->inferedType = TYPE_BOOL;
 }
 
+NodeType inspect_print_function_type(Node* node){
+  NodeType left_type = get_node_type(node->left);
+  if( ! can_type_be_stringified(left_type) ) {
+    type_error(node,"The type %s cannot be printed",
+      get_type_name(left_type)
+    );
+  }
+  return node->inferedType = TYPE_UNKOWN;
+}
+
 NodeType inspect_read_function_type(Node* node){
   NodeType left_type = get_node_type(node->left);
-  if( left_type != TYPE_STRING) {
+  if( left_type != TYPE_STRING ) {
     type_error(node,"A %s cannot be assigned to a variable of type '%s'",
       get_type_name(TYPE_STRING),
       get_type_name(left_type)
@@ -544,5 +561,15 @@ void check_type_error_new_assignment(NodeType left_node_type, NodeType right_nod
   }
 }
 
+
+// It returns true if the type is Int or Float
+bool is_type_numeric(NodeType type){
+  return type == TYPE_INT || type == TYPE_FLOAT;
+}
+
+// It returns true if the type can be converted to string, like bool or Int
+bool can_type_be_stringified(NodeType type){
+  return type == TYPE_INT || type == TYPE_FLOAT || type == TYPE_STRING  || type == TYPE_BOOL;
+}
 
 
