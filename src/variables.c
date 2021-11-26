@@ -7,13 +7,16 @@
 #include <string.h>
 
 
-
+// Internal recursive function to validate the variables in a program.
 void count_variables(Node * node);
+
+// Internal function that creates a variable
 Variable * create_variable(const char * name, int line);
 
 #define MAX_VARIABLES  256
 
 static Variable * variables[MAX_VARIABLES];
+
 static int total_variables = 0;
 
 /*******************************************************************
@@ -102,8 +105,13 @@ void count_variables(Node * node){
   }
 }
 
+// It prints an error if the variable was not initialized
 bool check_variable_was_assigned(Variable * var,Node * node);
+
+// It prints an error if the variable was not defined
 bool check_variable_use(Variable * var,const char * name,Node * node);
+
+// It prints an error if the variable was already defined
 void check_variable_assignment(const char * name,Node * node);
 
 
@@ -146,8 +154,13 @@ void validate_assignment(Node * node){
 
 
 Variable * create_variable(const char * name, int line){
-  Variable * var = malloc(sizeof(Variable));
 
+  if (total_variables +1 == MAX_VARIABLES){
+    unknown_error("There too many variables defined. Shutting down.");
+    exit(-1);
+  }
+
+  Variable * var = malloc(sizeof(Variable));
   var->name = name;
   var->references = 1;
   var->first_appearence = line;

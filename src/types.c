@@ -7,14 +7,30 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
+// It returns true if it is possible to compare with the equality operators (== !=) two different 
+// data types
 bool can_use_equality_operator(NodeType left_node_type, NodeType right_node_type);
+
+// It returns the result data type of adding up two different data types. If the return type is
+// unknown, then the operation is not valid.
 NodeType get_addition_return_type(NodeType left_node_type, NodeType right_node_type);
+
+// It returns the result data type of an aritmetic operation between two different data types. If the return type is
+// unknown, then the operation is not valid.
 NodeType get_aritmetic_operator_return_type(NodeType left_node_type, NodeType right_node_type);
+
+// It prints an error if we mix up data types at an assignment
 void check_type_error_new_assignment(NodeType left_node_type, NodeType right_node_type, Node * node );
+
+// It prints an error if we try to open a video into a data type thats not Video
 void check_type_variable_open_video(NodeType type,Node * node);
+
+// Internal recursive function that will calculate and verify the types of the program
 NodeType get_node_type(Node * node);
+
+// It assigns the data type to a variable stored in variables.c
 void node_assignment(Node * node, NodeType type);
-const char * get_parameter_name(NodeId id);
+
 
 /*******************************************************************
 *                       LOOKUP TABLES                              * 
@@ -528,21 +544,5 @@ void check_type_error_new_assignment(NodeType left_node_type, NodeType right_nod
   }
 }
 
-const char * get_parameter_name(NodeId id){
-  switch (id)
-  {
-  case NODE_STREAM_BITRATE:
-    return "Bitrate";
-  case NODE_STREAM_FRAMERATE:
-    return "Framerate";
-  case NODE_STREAM_SPEED:
-    return "Speed";
-  case NODE_STREAM_SIZE:
-    return "Size";
-  case NODE_STREAM_CODEC:
-    return "Codec";
-  default:
-    return "UNKOWN";
-  }
-}
+
 

@@ -66,6 +66,28 @@ bool node_is_parseable(Node * node){
 }
 
 
+const char * get_parameter_name(Node* node){
+  if (node == NULL){
+    return "UKNOWN";
+  }
+  
+  switch (node->id)
+  {
+  case NODE_STREAM_BITRATE:
+    return "Bitrate";
+  case NODE_STREAM_FRAMERATE:
+    return "Framerate";
+  case NODE_STREAM_SPEED:
+    return "Speed";
+  case NODE_STREAM_SIZE:
+    return "Size";
+  case NODE_STREAM_CODEC:
+    return "Codec";
+  default:
+    return "UNKOWN";
+  }
+}
+
 
 /*******************************************************************
 *                      PRIVATE FUNCTIONS                           * 

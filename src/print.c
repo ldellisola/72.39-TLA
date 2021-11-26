@@ -27,6 +27,7 @@ void print_tree(Node * node, int depth){
 
 }
 
+
 void print_node(Node * node){
   printf("NODE: %p |",node);
 
