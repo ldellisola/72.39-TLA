@@ -7,6 +7,7 @@
 *.DS_STORE
 .vscode
 target/*
+*.out
 
 # User-specific files
 *.rsuser

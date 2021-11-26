@@ -103,9 +103,9 @@
 %start program
 
 %%
-program : lines 
+program : STATEMENT_DO ':' lines 
         { 
-          root = $1;
+          root = $3;
         }
         ;
 lines :  line lines 

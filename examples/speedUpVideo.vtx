@@ -1,4 +1,4 @@
-
+do:
 :! "Which video do you want to transcode?";
 
 String filename;
@@ -17,18 +17,6 @@ Float video_speed = Float[speedTxt];
 
 Video video { filename;
 
-^^
-
-Console.WriteLine("HOLA");
-
-^^
-
-
-Int hola;
-
-while (condicion) do
-
-end
 
 |newfile| 
 << 

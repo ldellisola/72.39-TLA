@@ -5,7 +5,7 @@ TGT_CONTEXT=target
 TEST_CONTEXT=test
 
 DOTNET_PROJ=$(SRC_CONTEXT)/dotnet
-DEPS= test.vi $(DOTNET_PROJ)/lib.cs $(SRC_CONTEXT)/grammar.y $(SRC_CONTEXT)/lex.l $(SRC_CONTEXT)/node.c $(SRC_CONTEXT)/types.c $(SRC_CONTEXT)/print.c $(SRC_CONTEXT)/variables.c $(SRC_CONTEXT)/translator.c $(SRC_CONTEXT)/errors.c
+DEPS= $(DOTNET_PROJ)/lib.cs $(SRC_CONTEXT)/grammar.y $(SRC_CONTEXT)/lex.l $(SRC_CONTEXT)/node.c $(SRC_CONTEXT)/types.c $(SRC_CONTEXT)/print.c $(SRC_CONTEXT)/variables.c $(SRC_CONTEXT)/translator.c $(SRC_CONTEXT)/errors.c
 OUT=$(TGT_CONTEXT)/compiler
 
 INPUT=test.vi
@@ -24,7 +24,7 @@ $(OUT): $(DEPS)
 	@mkdir -p $(TGT_CONTEXT)/dotnet/
 	lex -o $(TGT_CONTEXT)/lex.yy.c $(SRC_CONTEXT)/lex.l
 	bison -b $(TGT_CONTEXT)/y -v -d $(SRC_CONTEXT)/grammar.y
-	gcc -o $(OUT) $(TGT_CONTEXT)/lex.yy.c  -I $(INCLUDE) $(SRC_CONTEXT)/types.c $(SRC_CONTEXT)/node.c $(SRC_CONTEXT)/print.c $(SRC_CONTEXT)/variables.c $(SRC_CONTEXT)/translator.c  $(SRC_CONTEXT)/errors.c $(TGT_CONTEXT)/y.tab.c   $(GCC_FLAGS)
+	gcc-11 -o $(OUT) $(TGT_CONTEXT)/lex.yy.c  -I $(INCLUDE) $(SRC_CONTEXT)/types.c $(SRC_CONTEXT)/node.c $(SRC_CONTEXT)/print.c $(SRC_CONTEXT)/variables.c $(SRC_CONTEXT)/translator.c  $(SRC_CONTEXT)/errors.c $(TGT_CONTEXT)/y.tab.c   $(GCC_FLAGS)
 
 
 compile: $(OUT)

@@ -493,7 +493,7 @@ NodeType inspect_parameter_type(Node* node){
 
     if(left_type != right_type){
       type_error(node,"The parameter '%s' does not accept values of the type %s",
-        get_parameter_name(node->left->id),
+        get_parameter_name(node->left),
         get_type_name(right_type)
       );
   }
