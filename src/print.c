@@ -1,5 +1,5 @@
 #include "../include/print.h"
-#include "variables.h"
+#include "../include/variables.h"
 
 #include <stdio.h>
 

@@ -2,6 +2,8 @@
 #include "../include/node.h"
 #include "../include/errors.h"
 #include "../include/types.h"
+#include "../include/print.h"
+#include "../include/variables.h"
 #include <stdio.h>
 
 
@@ -23,8 +25,12 @@ void translate_to_file(Node * root, const char * filePath){
 
   if( output == NULL)
     unknown_error("Cannot open file %s",filePath);
+
+  fprintf(output,"try {");
   
   translate(root);
+
+  fprintf(output, "} catch(Exception e){ Console.WriteLine(\"Exception: \" + e.Message); }");
 
   fclose(output);
 }
