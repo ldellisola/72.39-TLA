@@ -11,12 +11,25 @@ In order to use our VidTrx compiler, we need to set up some dependencies. Please
 
 And add them to your PATH variable. We also provide a [script](./install.sh) to set everything in a second!
 
-==TODO==
+Now that you have al the necessary dependencies, clone the git repository using the following command: 
+`git clone https://github.com/ldellisola/TLA-VidTrx.git`
 
 ## Compilation
- ==TODO==
+To compile all the needed files and use the VidTrx compiler on a .vtx file we provide the script `compile.sh`
 
+### Usage
 
+- Make sure you are inside the cloned repoository
+- Run the following command to ensure you have executing permits over the script
+ `chmod +x compile.sh`
+- Compile all the files using the script. It should look like this:
+	 ` ./compile.sh <path> `
+	Here's an example of compiling and runing a .vtx file
+	```
+	./compile examples/helloworld.vtx
+	./run
+	```
+- You can use `make clean` to clean the directory of all the created files
 ## Language Definition
 
 VidTrix is a domain specific language developed exclusively to make video transformation operations simple and fast. The language is equiped with specific data types and operators to handle this use case.
