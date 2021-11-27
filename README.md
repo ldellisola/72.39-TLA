@@ -213,7 +213,7 @@ Console.WriteLine("Hello, World!");
 ^^
 ```
 This is quite powerfull, as programmers can use native functions, data types and methods from the C# language. You can even interact with variables and code from VidTrx!
-There are several uses, for example:
+There are several use cases, for example:
 - We can use advanced string operations:
 
 	```
@@ -221,12 +221,14 @@ There are several uses, for example:
 	String first_name = "";
 	String last_name = "";
 	^^
-	var list = full_name.Split(' ');
-	first_name = list[0];
-	last_name = list[1]
+	var list = _full_name.Split(' ');
+	_first_name = list[0];
+	_last_name = list[1]
 	^^
 	:! "first name: " + first_name + ", last name: " + last_name;
   ```
+
+	It is important to know aswell that all the variables that are defined in VidTrx code, will be prepended with an underscore to avoid any possible use of C# 
   
 - We can receive arguments from the command line:
 

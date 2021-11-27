@@ -1,0 +1,15 @@
+do:
+
+:! "What video do you want to mute?";
+
+String file;
+:? file;
+
+String new_file = "";
+
+// Example of C# scripting
+^^
+_new_file = _file.Insert(_file.LastIndexOf("."),"_muted");
+^^
+
+|new_file| << <- { file;
