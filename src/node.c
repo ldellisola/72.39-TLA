@@ -61,7 +61,6 @@ bool node_is_unary_operator(Node * node){
 
 
 bool node_is_parseable(Node * node){
-  printf("%d\n",node->id);
   return NODE_VARIABLE_TYPE_BOOL == node->id || node->id == NODE_VARIABLE_TYPE_FLOAT || node->id == NODE_VARIABLE_TYPE_INT;
 }
 
