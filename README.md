@@ -1,4 +1,6 @@
 # VidTrx
+VidTrx is a new languange designed to make transcoding videos super easy!
+It was designed and implemented for the course Automata and Grammars (72.39) at ITBA and It's powered by FFMPEG and .NET!
 
 ## Installation
 
